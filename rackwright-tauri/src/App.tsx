@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
-import { open, save } from "@tauri-apps/plugin-dialog";
+import { backend, IS_WEB } from "./backend";
+import * as A from "./api";
+import { ConflictDialog, NamePrompt, RackList, UserBar, WebProps } from "./web";
 import RackView, { Resolver, Sel } from "./RackView";
 import { Device, Doc, PortPos, RouteResult } from "./types";
 import {
@@ -20,12 +21,19 @@ const icon = (i: number) => {
   return s === "disc" ? "●" : s === "squircle" ? "▢" : "▬";
 };
 
-export default function App() {
+interface Cur { id: number; name: string; version: number }
+
+export default function App({ web }: { web?: WebProps } = {}) {
   const [doc, setDoc] = useState<Doc>(empty);
   const [undo, setUndo] = useState<Doc[]>([]);
   const [redo, setRedo] = useState<Doc[]>([]);
   const [dirty, setDirty] = useState(false);
   const [path, setPath] = useState<string | null>(null);
+  // Web only: the shared rack being edited (null = not saved yet), and the dialogs around it.
+  const [cur, setCur] = useState<Cur | null>(null);
+  const [showRacks, setShowRacks] = useState(false);
+  const [nameAsk, setNameAsk] = useState<{ title: string; initial: string; cb: (n: string) => void } | null>(null);
+  const [conflict, setConflict] = useState<{ by: string } | null>(null);
   const [face, setFace] = useState<"front" | "rear">("front");
   const [routes, setRoutes] = useState<RouteResult>(none);
   const [ports, setPorts] = useState<PortPos[]>([]);
@@ -55,8 +63,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    invoke<RouteResult>("route_cables", { doc, face }).then(setRoutes).catch((e) => setMsg(String(e)));
-    invoke<PortPos[]>("port_positions", { doc }).then(setPorts).catch((e) => setMsg(String(e)));
+    let stale = false;
+    backend.routeCables(doc, face).then((r) => { if (!stale) setRoutes(r); }).catch((e) => setMsg(String(e instanceof Error ? e.message : e)));
+    backend.portPositions(doc).then((p) => { if (!stale) setPorts(p); }).catch((e) => setMsg(String(e instanceof Error ? e.message : e)));
+    return () => { stale = true; };
   }, [doc, face]);
 
   /** Apply an edit to a copy of the document, with undo. fn returns a status message, or "!msg" to reject the edit.
@@ -98,19 +108,68 @@ export default function App() {
     setSel(null);
   }, [sel, edit]);
 
-  const reset = (d: Doc, p: string | null) => { setDoc(d); setPath(p); setUndo([]); setRedo([]); setSel(null); setPending(null); setDirty(false); setFitTick((n) => n + 1); };
+  const reset = (d: Doc, p: string | null, c: Cur | null = null) => { setDoc(d); setPath(p); setCur(c); setUndo([]); setRedo([]); setSel(null); setPending(null); setDirty(false); setFitTick((n) => n + 1); };
   const doNew = () => { if (!dirty || confirm("Discard unsaved changes?")) reset(clone(empty), null); };
+  const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
+
   const doOpen = async () => {
     if (dirty && !confirm("Discard unsaved changes?")) return;
-    const p = await open({ filters: [{ name: "Rack", extensions: ["json"] }] });
-    if (typeof p !== "string") return;
-    try { reset(await invoke<Doc>("open_doc", { path: p }), p); setMsg(""); } catch (e) { setMsg(String(e)); }
+    if (IS_WEB) { setShowRacks(true); return; }
+    try {
+      const r = await backend.openDoc();
+      if (r) { reset(r.doc, r.path); setMsg(""); }
+    } catch (e) { setMsg(String(e)); }
   };
+
+  const loadShared = async (id: number) => {
+    try {
+      const r = await A.getRack(id);
+      reset(r.doc, null, { id: r.id, name: r.name, version: r.version });
+      setMsg(""); setShowRacks(false);
+    } catch (e) { say(errText(e), true); }
+  };
+
+  /** Web: PUT the current rack (or POST when new). Handles the 409 conflict flow. */
+  const saveShared = useCallback(async (name: string, c: Cur | null, d: Doc) => {
+    try {
+      const m = c ? await A.updateRack(c.id, name, d, c.version) : await A.createRack(name, d);
+      setCur({ id: m.id, name: m.name, version: m.version }); setDirty(false); say("Saved");
+    } catch (e) {
+      if (e instanceof A.ApiError && e.status === 409 && c) setConflict({ by: String(e.body?.updated_by ?? "") });
+      else say(errText(e), true);
+    }
+  }, [say]);
+
   const doSave = useCallback(async (asNew = false) => {
-    const p = (!asNew && path) || (await save({ filters: [{ name: "Rack", extensions: ["json"] }], defaultPath: "rack.rack.json" }));
-    if (!p) return;
-    try { await invoke("save_doc", { path: p, doc }); setPath(p); setDirty(false); say("Saved"); } catch (e) { say(String(e), true); }
-  }, [path, doc, say]);
+    if (IS_WEB) {
+      if (cur && !asNew) { saveShared(cur.name, cur, doc); return; }
+      setNameAsk({ title: asNew ? "Save as new shared rack" : "Save rack", initial: cur?.name ?? "", cb: (n) => { setNameAsk(null); saveShared(n, null, doc); } });
+      return;
+    }
+    try {
+      const p = await backend.saveDoc(asNew ? null : path, doc);
+      if (p) { setPath(p); setDirty(false); say("Saved"); }
+    } catch (e) { say(String(e), true); }
+  }, [path, cur, doc, say, saveShared]);
+
+  const conflictTheirs = async () => { setConflict(null); if (cur) await loadShared(cur.id); };
+  const conflictMine = async () => {
+    setConflict(null);
+    if (!cur) return;
+    try {
+      const latest = await A.getRack(cur.id); // pick up the current version, then overwrite it
+      await saveShared(cur.name, { ...cur, version: latest.version }, doc);
+    } catch (e) { say(errText(e), true); }
+  };
+
+  const doImportFile = async () => {
+    if (dirty && !confirm("Discard unsaved changes?")) return;
+    try {
+      const r = await A.importFile();
+      if (r) { reset(r.doc, null); setMsg("Imported " + r.name); }
+    } catch (e) { say(errText(e), true); }
+  };
+  const doExportFile = () => A.exportFile(cur?.name ?? "rack", doc);
 
   const onPort = (pid: number) => {
     if (pending == null) { setPending(pid); say("Click a second port to connect"); return; }
@@ -267,6 +326,7 @@ export default function App() {
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column", color: "#e6e8eb", fontFamily: "Segoe UI, sans-serif", userSelect: pdrag ? "none" : undefined }}>
       <div style={{ height: 42, padding: "6px 10px", background: "#1b1d21", borderBottom: "1px solid #2c2f35", boxSizing: "border-box", whiteSpace: "nowrap", overflow: "hidden" }}>
+        {IS_WEB && web && <UserBar web={web} />}
         <button style={btn} onClick={doNew}>New</button>
         <button style={btn} onClick={doOpen}>Open</button>
         <button style={btn} onClick={() => doSave()}>Save{dirty ? " *" : ""}</button>
@@ -274,11 +334,13 @@ export default function App() {
         <button style={btn} onClick={doUndo} disabled={!undo.length}>Undo</button>
         <button style={btn} onClick={doRedo} disabled={!redo.length}>Redo</button>
         <button style={btn} onClick={() => edit((d) => { const r = addRack(d); setSel({ kind: "rack", id: r.id }); })}>+ Rack</button>
+        {IS_WEB && <button style={btn} onClick={doImportFile} title="Load a .rack.json file from this computer">Import file</button>}
+        {IS_WEB && <button style={btn} onClick={doExportFile} title="Download as .rack.json">Export file</button>}
         <button style={btn} onClick={() => setImportOpen(true)}>Import list</button>
         <button style={btn} onClick={() => setFitTick((n) => n + 1)} title="Home">Fit</button>
         <button style={btn} onClick={() => setFace(face === "front" ? "rear" : "front")}>Showing: {face} (flip)</button>
         <span style={{ opacity: 0.7, fontSize: 12, marginLeft: 8 }}>
-          {path ?? "no file"} | {doc.racks.length}R {doc.devices.length}D {doc.cables.length}C {msg}
+          {IS_WEB ? (cur ? `${cur.name} (v${cur.version})` : "unsaved rack") : (path ?? "no file")} | {doc.racks.length}R {doc.devices.length}D {doc.cables.length}C {msg}
         </span>
       </div>
       <div style={{ flex: 1, minHeight: 0, display: "flex" }}>
@@ -403,6 +465,9 @@ export default function App() {
         <div style={{ position: "fixed", left: pdrag.x + 12, top: pdrag.y + 8, pointerEvents: "none", background: "#2a3a52", border: "1px solid #5b8bd0",
           borderRadius: 4, padding: "2px 8px", fontSize: 12, zIndex: 50 }}>{icon(pdrag.i)} {CATALOG[pdrag.i].name}</div>
       )}
+      {IS_WEB && showRacks && <RackList currentId={cur?.id ?? null} onClose={() => setShowRacks(false)} onOpen={(m) => loadShared(m.id)} />}
+      {IS_WEB && nameAsk && <NamePrompt title={nameAsk.title} initial={nameAsk.initial} onOk={nameAsk.cb} onCancel={() => setNameAsk(null)} />}
+      {IS_WEB && conflict && <ConflictDialog by={conflict.by} onTheirs={conflictTheirs} onMine={conflictMine} onCancel={() => setConflict(null)} />}
       {importOpen && (
         <div style={{ position: "fixed", inset: 0, background: "#000a", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ background: "#1b1d21", padding: 14, borderRadius: 6, width: 520, border: "1px solid #3a3d42" }}>

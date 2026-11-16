@@ -1,0 +1,38 @@
+[package]
+name = "rackwright-server"
+version = "2.2.1"
+edition = "2021"
+
+# Keep this crate out of any parent workspace.
+[workspace]
+
+[lib]
+name = "rackwright_server"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rackwright-server"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.7.9"
+tokio = { version = "1.41.1", features = ["rt-multi-thread", "macros", "net", "time"] }
+tower-http = { version = "0.6.2", features = ["fs"] }
+rusqlite = { version = "0.32.1", features = ["bundled"] }
+argon2 = "0.5.3"
+rand = "0.8.5"
+sha2 = "0.10.8"
+hex = "0.4.3"
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = { version = "1.0.133", features = ["raw_value"] }
+time = { version = "0.3.36", features = ["formatting"] }
+
+[dev-dependencies]
+tower = { version = "0.5.1", features = ["util"] }
+tempfile = "3.14.0"
+
+# Password hashing is slow in unoptimised builds; keep tests quick.
+[profile.dev.package.argon2]
+opt-level = 3
+[profile.dev.package.blake2]
+opt-level = 3

@@ -1,0 +1,166 @@
+name: Sync upstream
+
+# Mirrors hast3/Rackwright master into master and desktop, and opens a PR that
+# merges it into web. See AGENTS.md "Pulling upstream changes".
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  issues: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    # Only forks sync from hast3/Rackwright; the upstream repo itself has nothing to pull.
+    if: github.repository != 'hast3/Rackwright'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/hast3/Rackwright.git
+          git fetch upstream master
+          git fetch origin
+
+      - name: Mirror master and desktop
+        run: |
+          set -euo pipefail
+          for b in master desktop; do
+            if ! git rev-parse --verify -q "origin/$b" >/dev/null; then
+              echo "::error::origin/$b does not exist."
+              exit 1
+            fi
+            if [ "$(git rev-parse "origin/$b")" = "$(git rev-parse upstream/master)" ]; then
+              echo "$b already equals upstream master."
+            elif git merge-base --is-ancestor "origin/$b" upstream/master; then
+              echo "Fast-forwarding $b to upstream master."
+              git push origin "upstream/master:refs/heads/$b"
+            else
+              echo "::error::$b has commits that are not upstream. desktop and master must only mirror hast3/Rackwright master."
+              exit 1
+            fi
+          done
+
+      - name: Open PR for web
+        run: |
+          set -euo pipefail
+          short=$(git rev-parse --short=7 upstream/master)
+
+          if git merge-base --is-ancestor upstream/master origin/web; then
+            echo "web is up to date"
+            exit 0
+          fi
+
+          existing=$(gh pr list --state open --json headRefName,url \
+            --jq '[.[] | select(.headRefName | startswith("sync/upstream-"))][0].url // empty')
+          if [ -n "$existing" ]; then
+            echo "A sync PR is already open, not opening another: $existing"
+            exit 0
+          fi
+
+          branch="sync/upstream-$short"
+          git checkout -B "$branch" origin/web
+
+          if ! git merge --no-ff upstream/master -m "Merge upstream hast3/Rackwright master ($short)"; then
+            conflicts=$(git diff --name-only --diff-filter=U)
+            git merge --abort
+            commits=$(git log --no-merges --reverse --format='- %s (%h)' origin/web..upstream/master)
+            title="Upstream merge needs a hand"
+            {
+              echo "Merging hast3/Rackwright master ($short) into web conflicts."
+              echo
+              echo "Conflicting files:"
+              echo
+              printf '%s\n' "$conflicts" | sed 's/^/- `/; s/$/`/'
+              echo
+              echo "New upstream commits:"
+              echo
+              printf '%s\n' "$commits"
+              echo
+              echo 'See AGENTS.md, "Pulling upstream changes", for how to resolve this by hand.'
+              echo
+              echo "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            } > "$RUNNER_TEMP/issue.md"
+            issue=$(gh issue list --state open --search "\"$title\" in:title" --json number,title \
+              --jq "[.[] | select(.title == \"$title\")][0].number // empty")
+            if [ -n "$issue" ]; then
+              gh issue comment "$issue" --body-file "$RUNNER_TEMP/issue.md"
+              echo "Commented on issue #$issue."
+            else
+              gh issue create --title "$title" --body-file "$RUNNER_TEMP/issue.md"
+            fi
+            exit 0
+          fi
+
+          # Changelog entry
+          commits=$(git log --no-merges --reverse --format='  - %s (%h)' origin/web..upstream/master)
+          {
+            echo "- Pulled upstream changes from hast3/Rackwright:"
+            printf '%s\n' "$commits"
+          } > "$RUNNER_TEMP/block.md"
+
+          if [ ! -f CHANGELOG.md ]; then
+            printf '# Changelog\n\n' > CHANGELOG.md
+          fi
+          first=$(grep -m1 '^## ' CHANGELOG.md || true)
+          if [ "$first" = "## Unreleased" ]; then
+            awk -v blockfile="$RUNNER_TEMP/block.md" '
+              { print }
+              !done && $0 == "## Unreleased" {
+                print ""
+                while ((getline line < blockfile) > 0) print line
+                done = 1
+              }' CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.new"
+          elif [ -n "$first" ]; then
+            awk -v blockfile="$RUNNER_TEMP/block.md" '
+              !done && /^## / {
+                print "## Unreleased"
+                print ""
+                while ((getline line < blockfile) > 0) print line
+                print ""
+                done = 1
+              }
+              { print }' CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.new"
+          else
+            { cat CHANGELOG.md; printf '\n## Unreleased\n\n'; cat "$RUNNER_TEMP/block.md"; } > "$RUNNER_TEMP/CHANGELOG.new"
+          fi
+          cp "$RUNNER_TEMP/CHANGELOG.new" CHANGELOG.md
+          git add CHANGELOG.md
+          git commit -m "Changelog: upstream changes $short"
+
+          git push --force origin "$branch"
+
+          # PRs and pushes made with GITHUB_TOKEN do not trigger workflows, so start CI by hand.
+          gh workflow run web.yml --ref "$branch"
+
+          {
+            echo "Merges hast3/Rackwright master ($short) into web."
+            echo
+            echo "New upstream commits:"
+            echo
+            printf '%s\n' "$commits" | sed 's/^  //'
+            echo
+            echo "CI was started on the branch (workflow_dispatch; check the Actions tab)."
+            echo
+            echo "Before merging: set the version in web/server/Cargo.toml and rename ## Unreleased in CHANGELOG.md to that version (see AGENTS.md)."
+          } > "$RUNNER_TEMP/pr.md"
+
+          gh pr create --base web --head "$branch" \
+            --title "Pull upstream changes ($short)" \
+            --body-file "$RUNNER_TEMP/pr.md"

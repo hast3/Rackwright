@@ -1,0 +1,123 @@
+name: CI
+
+# The desktop crate (rackwright-tauri/src-tauri) is not built here: it needs webkit.
+on:
+  push:
+    branches: [web, master]
+  pull_request:
+    branches: [web, master]
+  workflow_dispatch:
+
+jobs:
+  changelog:
+    # Push and PR only. Dispatch runs (including the ones sync-upstream starts) skip it.
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: CHANGELOG.md changed
+        env:
+          EVENT: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "pull_request" ]; then
+            base="$PR_BASE"; head="$PR_HEAD"
+          else
+            base="$PUSH_BEFORE"; head="$PUSH_AFTER"
+            if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ]; then
+              echo "New branch, nothing to compare. Skipping."
+              exit 0
+            fi
+          fi
+          if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            echo "Base commit $base is not in the clone (force push?). Skipping."
+            exit 0
+          fi
+          if ! git diff --name-only "$base" "$head" | grep -qx 'CHANGELOG.md'; then
+            echo "::error file=CHANGELOG.md::Add an entry to CHANGELOG.md for this change (see AGENTS.md)."
+            exit 1
+          fi
+          echo "CHANGELOG.md changed."
+      - name: CHANGELOG version matches Cargo.toml
+        run: |
+          set -euo pipefail
+          top=$(grep -m1 '^## ' CHANGELOG.md || true)
+          if [ -z "$top" ]; then
+            echo "::error file=CHANGELOG.md::No '## ' heading found in CHANGELOG.md."
+            exit 1
+          fi
+          echo "Top heading: $top"
+          cargo_version=$(awk '/^\[package\]/{p=1;next} /^\[/{p=0} p && /^version[[:space:]]*=/{gsub(/.*=[[:space:]]*"|".*/,"");print;exit}' web/server/Cargo.toml)
+          if [ -z "$cargo_version" ]; then
+            echo "::error::Could not read version from web/server/Cargo.toml."
+            exit 1
+          fi
+          if printf '%s' "$top" | grep -qiE '^##[[:space:]]+Unreleased'; then
+            echo "Unreleased is allowed."
+            exit 0
+          fi
+          if [[ "$top" =~ ^##[[:space:]]+v?([0-9]+(\.[0-9]+)*) ]]; then
+            changelog_version="${BASH_REMATCH[1]}"
+            if [ "$changelog_version" != "$cargo_version" ]; then
+              echo "::error file=CHANGELOG.md::Top CHANGELOG.md version ($changelog_version) does not match web/server/Cargo.toml ($cargo_version)."
+              exit 1
+            fi
+            echo "Version $cargo_version matches."
+          else
+            echo "::error file=CHANGELOG.md::Top heading must be '## X.Y.Z — YYYY-MM-DD' or '## Unreleased'."
+            exit 1
+          fi
+
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: web/server
+      - name: Build
+        working-directory: web/server
+        # A committed Cargo.lock must be current; the LXC builds with --locked.
+        run: |
+          if [ -f Cargo.lock ]; then cargo build --release --locked; else cargo build --release; fi
+      - name: Test
+        working-directory: web/server
+        run: cargo test --locked
+      - name: Keep Cargo.lock
+        uses: actions/upload-artifact@v4
+        with:
+          name: cargo-lock
+          path: web/server/Cargo.lock
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: rackwright-tauri/package-lock.json
+      - name: Install
+        working-directory: rackwright-tauri
+        run: npm ci
+      - name: Build (desktop front end)
+        working-directory: rackwright-tauri
+        run: npm run build
+      - name: Build (web)
+        working-directory: rackwright-tauri
+        run: npm run build:web
+
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: ShellCheck
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck && shellcheck -S warning proxmox/ct/rackwright.sh proxmox/install/rackwright-install.sh

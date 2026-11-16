@@ -1,6 +1,12 @@
 __pycache__/
 *.pyc
 *.rack.json
+# The synthetic example rack is the router test fixture; real rack files stay out.
+!Homelab.rack.json
 *.svg
 *.csv
 dist/
+
+web/server/target
+
+web/dist/
