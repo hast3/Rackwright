@@ -1,0 +1,2192 @@
+{
+  "v": 1,
+  "nid": 275,
+  "racks": [
+    {
+      "id": 1,
+      "name": "Main Rack",
+      "u": 42,
+      "x": 0,
+      "y": 0,
+      "numbering": "up",
+      "color": "#3a3d42",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "name": "Lab Rack",
+      "u": 24,
+      "x": 618,
+      "y": 0,
+      "numbering": "up",
+      "color": "#3a3d42",
+      "notes": ""
+    }
+  ],
+  "devices": [
+    {
+      "id": 3,
+      "name": "fw-edge",
+      "model": "FortiGate 100F",
+      "type": "Firewall",
+      "u_size": 1,
+      "rack": 1,
+      "u": 40,
+      "side": 0,
+      "half": false,
+      "color": "#d9dcdf",
+      "ip": "10.0.0.1",
+      "serial": "",
+      "notes": "",
+      "rows": 2,
+      "ports": [
+        {
+          "id": 4,
+          "name": "1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 5,
+          "name": "2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 6,
+          "name": "3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 7,
+          "name": "4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 8,
+          "name": "5",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 9,
+          "name": "6",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 10,
+          "name": "7",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 11,
+          "name": "8",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 12,
+          "name": "9",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 13,
+          "name": "10",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 14,
+          "name": "11",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 15,
+          "name": "12",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 18,
+          "name": "15",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 19,
+          "name": "16",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 20,
+          "name": "17",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 21,
+          "name": "18",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 22,
+          "name": "19",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 23,
+          "name": "20",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 24,
+          "name": "SFP+1",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 25,
+          "name": "SFP+2",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 26,
+          "name": "SFP+3",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 27,
+          "name": "SFP+4",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 28,
+          "name": "Console",
+          "type": "Console",
+          "label": ""
+        },
+        {
+          "id": 29,
+          "name": "Power",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both",
+      "plate": {
+        "k": "gen",
+        "style": "fw",
+        "brand": "FORTINET",
+        "bc": "#ee3124",
+        "body": "#d9dcdf",
+        "lab": "#1b1e22",
+        "desk": false
+      }
+    },
+    {
+      "id": 30,
+      "name": "patch-a",
+      "model": "",
+      "type": "Patch panel",
+      "u_size": 1,
+      "rack": 1,
+      "u": 42,
+      "side": 0,
+      "half": false,
+      "color": "#9aa3ad",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 31,
+          "name": "1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 32,
+          "name": "2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 33,
+          "name": "3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 34,
+          "name": "4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 35,
+          "name": "5",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 36,
+          "name": "6",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 37,
+          "name": "7",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 38,
+          "name": "8",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 39,
+          "name": "9",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 40,
+          "name": "10",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 41,
+          "name": "11",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 42,
+          "name": "12",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 43,
+          "name": "13",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 44,
+          "name": "14",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 45,
+          "name": "15",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 46,
+          "name": "16",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 47,
+          "name": "17",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 48,
+          "name": "18",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 49,
+          "name": "19",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 50,
+          "name": "20",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 51,
+          "name": "21",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 52,
+          "name": "22",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 53,
+          "name": "23",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 54,
+          "name": "24",
+          "type": "RJ45",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "front"
+    },
+    {
+      "id": 55,
+      "name": "mgr-a1",
+      "model": "",
+      "type": "Cable manager",
+      "u_size": 1,
+      "rack": 1,
+      "u": 41,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 56,
+      "name": "mgr-a2",
+      "model": "",
+      "type": "Cable manager",
+      "u_size": 1,
+      "rack": 1,
+      "u": 39,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 57,
+      "name": "sw-core",
+      "model": "UniFi Switch Pro 24",
+      "type": "Switch",
+      "u_size": 1,
+      "rack": 1,
+      "u": 38,
+      "side": 0,
+      "half": false,
+      "color": "#dfe2e6",
+      "ip": "10.0.0.2",
+      "serial": "",
+      "notes": "",
+      "rows": 2,
+      "ports": [
+        {
+          "id": 58,
+          "name": "1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 59,
+          "name": "2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 60,
+          "name": "3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 61,
+          "name": "4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 62,
+          "name": "5",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 63,
+          "name": "6",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 64,
+          "name": "7",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 65,
+          "name": "8",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 66,
+          "name": "9",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 67,
+          "name": "10",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 68,
+          "name": "11",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 69,
+          "name": "12",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 70,
+          "name": "13",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 71,
+          "name": "14",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 72,
+          "name": "15",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 73,
+          "name": "16",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 74,
+          "name": "17",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 75,
+          "name": "18",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 76,
+          "name": "19",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 77,
+          "name": "20",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 78,
+          "name": "21",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 79,
+          "name": "22",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 80,
+          "name": "23",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 81,
+          "name": "24",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 82,
+          "name": "SFP+1",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 83,
+          "name": "SFP+2",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 84,
+          "name": "Power",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both",
+      "plate": {
+        "k": "unifi",
+        "lcd": true
+      }
+    },
+    {
+      "id": 85,
+      "name": "sw-access",
+      "model": "",
+      "type": "Switch",
+      "u_size": 1,
+      "rack": 1,
+      "u": 37,
+      "side": 0,
+      "half": false,
+      "color": "#3b6ea8",
+      "ip": "10.0.0.3",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 86,
+          "name": "1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 87,
+          "name": "2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 88,
+          "name": "3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 89,
+          "name": "4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 90,
+          "name": "5",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 91,
+          "name": "6",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 92,
+          "name": "7",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 93,
+          "name": "8",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 94,
+          "name": "9",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 95,
+          "name": "10",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 96,
+          "name": "11",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 97,
+          "name": "12",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 98,
+          "name": "13",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 99,
+          "name": "14",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 100,
+          "name": "15",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 101,
+          "name": "16",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 102,
+          "name": "17",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 103,
+          "name": "18",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 104,
+          "name": "19",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 105,
+          "name": "20",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 106,
+          "name": "21",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 107,
+          "name": "22",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 108,
+          "name": "23",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 109,
+          "name": "24",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 110,
+          "name": "25",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 111,
+          "name": "26",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 112,
+          "name": "27",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 113,
+          "name": "28",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 114,
+          "name": "29",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 115,
+          "name": "30",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 116,
+          "name": "31",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 117,
+          "name": "32",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 118,
+          "name": "33",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 119,
+          "name": "34",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 120,
+          "name": "35",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 121,
+          "name": "36",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 122,
+          "name": "37",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 123,
+          "name": "38",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 124,
+          "name": "39",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 125,
+          "name": "40",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 126,
+          "name": "41",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 127,
+          "name": "42",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 128,
+          "name": "43",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 129,
+          "name": "44",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 130,
+          "name": "45",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 131,
+          "name": "46",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 132,
+          "name": "47",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 133,
+          "name": "48",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 134,
+          "name": "SFP1",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 135,
+          "name": "SFP2",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 136,
+          "name": "SFP3",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 137,
+          "name": "SFP4",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 138,
+          "name": "Power",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "front"
+    },
+    {
+      "id": 139,
+      "name": "mgr-a3",
+      "model": "",
+      "type": "Cable manager",
+      "u_size": 1,
+      "rack": 1,
+      "u": 36,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 140,
+      "name": "hv-01",
+      "model": "",
+      "type": "Server",
+      "u_size": 2,
+      "rack": 1,
+      "u": 34,
+      "side": 0,
+      "half": false,
+      "color": "#4b5563",
+      "ip": "10.0.10.11",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 141,
+          "name": "NIC1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 142,
+          "name": "NIC2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 143,
+          "name": "NIC3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 144,
+          "name": "NIC4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 145,
+          "name": "iDRAC",
+          "type": "Mgmt",
+          "label": ""
+        },
+        {
+          "id": 146,
+          "name": "PSU1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 147,
+          "name": "PSU2",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 148,
+      "name": "hv-02",
+      "model": "PowerEdge R650",
+      "type": "Server",
+      "u_size": 1,
+      "rack": 1,
+      "u": 33,
+      "side": 0,
+      "half": false,
+      "color": "#2a2c30",
+      "ip": "10.0.10.12",
+      "serial": "",
+      "notes": "",
+      "rows": 2,
+      "ports": [
+        {
+          "id": 149,
+          "name": "NIC1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 150,
+          "name": "NIC2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 151,
+          "name": "NIC3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 152,
+          "name": "NIC4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 153,
+          "name": "iDRAC",
+          "type": "Mgmt",
+          "label": ""
+        },
+        {
+          "id": 154,
+          "name": "PSU1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 155,
+          "name": "PSU2",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both",
+      "plate": {
+        "k": "dell",
+        "bays": 10,
+        "brows": 1,
+        "size": "2.5"
+      }
+    },
+    {
+      "id": 156,
+      "name": "hv-03",
+      "model": "PowerEdge R650",
+      "type": "Server",
+      "u_size": 1,
+      "rack": 1,
+      "u": 32,
+      "side": 0,
+      "half": false,
+      "color": "#2a2c30",
+      "ip": "10.0.10.13",
+      "serial": "",
+      "notes": "",
+      "rows": 2,
+      "ports": [
+        {
+          "id": 157,
+          "name": "NIC1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 158,
+          "name": "NIC2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 159,
+          "name": "NIC3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 160,
+          "name": "NIC4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 161,
+          "name": "iDRAC",
+          "type": "Mgmt",
+          "label": ""
+        },
+        {
+          "id": 162,
+          "name": "PSU1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 163,
+          "name": "PSU2",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both",
+      "plate": {
+        "k": "dell",
+        "bays": 10,
+        "brows": 1,
+        "size": "2.5"
+      }
+    },
+    {
+      "id": 164,
+      "name": "mgr-a4",
+      "model": "",
+      "type": "Cable manager",
+      "u_size": 1,
+      "rack": 1,
+      "u": 31,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 165,
+      "name": "nas-01",
+      "model": "Synology RS1221+",
+      "type": "Storage",
+      "u_size": 2,
+      "rack": 1,
+      "u": 29,
+      "side": 0,
+      "half": false,
+      "color": "#2a2c30",
+      "ip": "10.0.10.20",
+      "serial": "",
+      "notes": "",
+      "rows": 4,
+      "ports": [
+        {
+          "id": 166,
+          "name": "LAN1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 167,
+          "name": "LAN2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 168,
+          "name": "LAN3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 169,
+          "name": "LAN4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 170,
+          "name": "PSU1",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both",
+      "plate": {
+        "k": "syn_rack",
+        "bays": 8,
+        "brows": 2,
+        "size": "3.5"
+      }
+    },
+    {
+      "id": 171,
+      "name": "pdu-a",
+      "model": "",
+      "type": "PDU",
+      "u_size": 1,
+      "rack": 1,
+      "u": 3,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 172,
+          "name": "Out1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 173,
+          "name": "Out2",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 174,
+          "name": "Out3",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 175,
+          "name": "Out4",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 176,
+          "name": "Out5",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 177,
+          "name": "Out6",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 178,
+          "name": "Out7",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 179,
+          "name": "Out8",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 180,
+          "name": "Input",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "rear"
+    },
+    {
+      "id": 181,
+      "name": "ups-main",
+      "model": "",
+      "type": "UPS",
+      "u_size": 2,
+      "rack": 1,
+      "u": 1,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 182,
+          "name": "Out1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 183,
+          "name": "Out2",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 184,
+          "name": "Out3",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 185,
+          "name": "Out4",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 186,
+          "name": "Out5",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 187,
+          "name": "Out6",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 188,
+          "name": "Power",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "rear"
+    },
+    {
+      "id": 189,
+      "name": "sw-lab",
+      "model": "",
+      "type": "Switch",
+      "u_size": 1,
+      "rack": 2,
+      "u": 24,
+      "side": 0,
+      "half": false,
+      "color": "#3b6ea8",
+      "ip": "10.0.20.2",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 190,
+          "name": "1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 191,
+          "name": "2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 192,
+          "name": "3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 193,
+          "name": "4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 194,
+          "name": "5",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 195,
+          "name": "6",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 196,
+          "name": "7",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 197,
+          "name": "8",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 198,
+          "name": "9",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 199,
+          "name": "10",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 200,
+          "name": "11",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 201,
+          "name": "12",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 202,
+          "name": "13",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 203,
+          "name": "14",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 204,
+          "name": "15",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 205,
+          "name": "16",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 206,
+          "name": "17",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 207,
+          "name": "18",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 208,
+          "name": "19",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 209,
+          "name": "20",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 210,
+          "name": "21",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 211,
+          "name": "22",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 212,
+          "name": "23",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 213,
+          "name": "24",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 214,
+          "name": "SFP1",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 215,
+          "name": "SFP2",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 216,
+          "name": "SFP3",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 217,
+          "name": "SFP4",
+          "type": "SFP+",
+          "label": ""
+        },
+        {
+          "id": 218,
+          "name": "Power",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "front"
+    },
+    {
+      "id": 219,
+      "name": "mgr-b1",
+      "model": "",
+      "type": "Cable manager",
+      "u_size": 1,
+      "rack": 2,
+      "u": 23,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 220,
+      "name": "lab-01",
+      "model": "PowerEdge R650",
+      "type": "Server",
+      "u_size": 1,
+      "rack": 2,
+      "u": 22,
+      "side": 0,
+      "half": false,
+      "color": "#2a2c30",
+      "ip": "10.0.20.11",
+      "serial": "",
+      "notes": "",
+      "rows": 2,
+      "ports": [
+        {
+          "id": 221,
+          "name": "NIC1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 222,
+          "name": "NIC2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 223,
+          "name": "NIC3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 224,
+          "name": "NIC4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 225,
+          "name": "iDRAC",
+          "type": "Mgmt",
+          "label": ""
+        },
+        {
+          "id": 226,
+          "name": "PSU1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 227,
+          "name": "PSU2",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both",
+      "plate": {
+        "k": "dell",
+        "bays": 10,
+        "brows": 1,
+        "size": "2.5"
+      }
+    },
+    {
+      "id": 228,
+      "name": "lab-02",
+      "model": "",
+      "type": "Server",
+      "u_size": 1,
+      "rack": 2,
+      "u": 21,
+      "side": 0,
+      "half": false,
+      "color": "#4b5563",
+      "ip": "10.0.20.12",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 229,
+          "name": "NIC1",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 230,
+          "name": "NIC2",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 231,
+          "name": "NIC3",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 232,
+          "name": "NIC4",
+          "type": "RJ45",
+          "label": ""
+        },
+        {
+          "id": 233,
+          "name": "iDRAC",
+          "type": "Mgmt",
+          "label": ""
+        },
+        {
+          "id": 234,
+          "name": "PSU1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 235,
+          "name": "PSU2",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "both"
+    },
+    {
+      "id": 236,
+      "name": "pdu-b",
+      "model": "",
+      "type": "PDU",
+      "u_size": 1,
+      "rack": 2,
+      "u": 3,
+      "side": 0,
+      "half": false,
+      "color": "#222428",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 0,
+      "ports": [
+        {
+          "id": 237,
+          "name": "Out1",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 238,
+          "name": "Out2",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 239,
+          "name": "Out3",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 240,
+          "name": "Out4",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 241,
+          "name": "Out5",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 242,
+          "name": "Out6",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 243,
+          "name": "Out7",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 244,
+          "name": "Out8",
+          "type": "Power",
+          "label": ""
+        },
+        {
+          "id": 245,
+          "name": "Input",
+          "type": "Power",
+          "label": ""
+        }
+      ],
+      "fx": 0,
+      "fy": 0,
+      "face": "rear"
+    },
+    {
+      "id": 246,
+      "name": "ap-lounge",
+      "model": "UniFi Access Point U6 Pro",
+      "type": "Wireless",
+      "u_size": 1,
+      "rack": null,
+      "u": 1,
+      "side": 0,
+      "half": true,
+      "color": "#eceef1",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 1,
+      "ports": [
+        {
+          "id": 247,
+          "name": "Eth",
+          "type": "RJ45",
+          "label": ""
+        }
+      ],
+      "fx": -300,
+      "fy": 200,
+      "face": "both",
+      "plate": {
+        "k": "uap",
+        "off": true
+      }
+    },
+    {
+      "id": 248,
+      "name": "ap-office",
+      "model": "UniFi Access Point U6 Pro",
+      "type": "Wireless",
+      "u_size": 1,
+      "rack": null,
+      "u": 1,
+      "side": 0,
+      "half": true,
+      "color": "#eceef1",
+      "ip": "",
+      "serial": "",
+      "notes": "",
+      "rows": 1,
+      "ports": [
+        {
+          "id": 249,
+          "name": "Eth",
+          "type": "RJ45",
+          "label": ""
+        }
+      ],
+      "fx": -300,
+      "fy": 500,
+      "face": "both",
+      "plate": {
+        "k": "uap",
+        "off": true
+      }
+    }
+  ],
+  "cables": [
+    {
+      "id": 250,
+      "a": 31,
+      "b": 58,
+      "color": "#1f6feb",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 1,
+      "unit": "ft",
+      "label": "Office drop 1",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 251,
+      "a": 24,
+      "b": 82,
+      "color": "#e69138",
+      "style": "solid",
+      "type": "DAC",
+      "length": 3,
+      "unit": "ft",
+      "label": "FW to core",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 252,
+      "a": 62,
+      "b": 86,
+      "color": "#8957e5",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "Core to access trunk",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 253,
+      "a": 90,
+      "b": 141,
+      "color": "#1f6feb",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 254,
+      "a": 92,
+      "b": 145,
+      "color": "#8957e5",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "iDRAC",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 255,
+      "a": 94,
+      "b": 149,
+      "color": "#1f6feb",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 256,
+      "a": 98,
+      "b": 159,
+      "color": "#1f6feb",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 257,
+      "a": 100,
+      "b": 166,
+      "color": "#1f6feb",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "NAS data",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 258,
+      "a": 134,
+      "b": 214,
+      "color": "#3d85c6",
+      "style": "solid",
+      "type": "OM3 LC",
+      "length": 20,
+      "unit": "ft",
+      "label": "Rack to rack uplink",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 259,
+      "a": 190,
+      "b": 221,
+      "color": "#1f6feb",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 260,
+      "a": 194,
+      "b": 225,
+      "color": "#8957e5",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 3,
+      "unit": "ft",
+      "label": "iDRAC",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 261,
+      "a": 70,
+      "b": 247,
+      "color": "#2da44e",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 40,
+      "unit": "ft",
+      "label": "AP lounge (PoE)",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 262,
+      "a": 198,
+      "b": 249,
+      "color": "#2da44e",
+      "style": "solid",
+      "type": "Cat6",
+      "length": 55,
+      "unit": "ft",
+      "label": "AP office (PoE)",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 263,
+      "a": 182,
+      "b": 180,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "UPS to PDU A",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 264,
+      "a": 186,
+      "b": 245,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 8,
+      "unit": "ft",
+      "label": "UPS to PDU B",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 265,
+      "a": 172,
+      "b": 29,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 266,
+      "a": 174,
+      "b": 84,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 267,
+      "a": 176,
+      "b": 138,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 268,
+      "a": 178,
+      "b": 146,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 269,
+      "a": 173,
+      "b": 154,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 270,
+      "a": 175,
+      "b": 163,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 271,
+      "a": 177,
+      "b": 170,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 272,
+      "a": 237,
+      "b": 218,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 273,
+      "a": 239,
+      "b": 226,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    },
+    {
+      "id": 274,
+      "a": 241,
+      "b": 234,
+      "color": "#2b2b2b",
+      "style": "solid",
+      "type": "Power",
+      "length": 2,
+      "unit": "ft",
+      "label": "",
+      "logical": "",
+      "notes": ""
+    }
+  ]
+}
